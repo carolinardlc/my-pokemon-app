@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import PokemonList from "./components/PokemonList";
-import "./App.css";
 
 const filterByQuery = (pokemons, query) => {
   return pokemons.filter((pokemon) => {
@@ -16,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <SearchBar query={query} setQuery={setQuery} setPokemons={setPokemons} />
-      <PokemonList pokemons={filterByQuery(pokemons, query)} />
+      <PokemonList pokemons={filterByQuery(pokemons, query).slice(0, 30)} />
     </div>
   );
 }
