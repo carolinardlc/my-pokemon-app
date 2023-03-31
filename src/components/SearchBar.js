@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
-function SearchBar({ onSearch }) {
-  const [search, setSearch] = useState("");
+const fetchPokemons = async () => {
+  let url = "https://pokeapi.co/api/v2/pokemon?limit=30";
 
-  const handleSubmit = (e) => {
+  const response = await fetch(url);
+  const data = await response.json();
+
+  return data;
+};
+
+function SearchBar({ query, setQuery, setPokemons }) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSearch(search);
+    const data = await fetchPokemons();
+
+    if (data) {
+      setPokemons(data.results);
+    }
   };
+
+  useEffect(() => {
+    handleSubmit({ preventDefault: () => {} });
+  }, []);
 
   return (
     <div className="search-bar">
@@ -14,8 +29,8 @@ function SearchBar({ onSearch }) {
         <input
           type="text"
           placeholder="Enter a Pokemon name"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
         />
         <button type="submit">Search</button>
       </form>

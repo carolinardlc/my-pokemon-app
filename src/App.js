@@ -1,35 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import PokemonList from "./components/PokemonList";
 import "./App.css";
 
+const filterByQuery = (pokemons, query) => {
+  return pokemons.filter((pokemon) => {
+    return pokemon.name.startsWith(query.toLowerCase());
+  });
+};
+
 function App() {
   const [pokemons, setPokemons] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  useEffect(() => {
-    const fetchPokemons = async () => {
-      let url = "https://pokeapi.co/api/v2/pokemon?limit=30";
-      if (searchQuery) {
-        url = `https://pokeapi.co/api/v2/pokemon/${searchQuery}`;
-      }
-
-      const response = await fetch(url);
-      const data = await response.json();
-      setPokemons(data.results || [data]);
-    };
-
-    fetchPokemons();
-  }, [searchQuery]);
-
-  const handleSearch = (search) => {
-    setSearchQuery(search);
-  };
+  const [query, setQuery] = useState("");
 
   return (
     <div className="App">
-      <SearchBar onSearch={handleSearch} />
-      <PokemonList pokemons={pokemons} />
+      <SearchBar query={query} setQuery={setQuery} setPokemons={setPokemons} />
+      <PokemonList pokemons={filterByQuery(pokemons, query)} />
     </div>
   );
 }
