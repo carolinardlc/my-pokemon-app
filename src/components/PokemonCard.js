@@ -12,6 +12,9 @@ const PokemonCard = ({
   const [pokemonData, setPokemonData] = useState(null);
   const [effectClass, setEffectClass] = useState("");
   const [spinClass, setSpinClass] = useState("");
+  const isFavorited = favoritePokemons.some(
+    (poke) => poke.name === pokemon.name
+  );
 
   const addSpinClass = () => {
     setSpinClass("spin-effect");
@@ -44,8 +47,8 @@ const PokemonCard = ({
           addSpinClass={addSpinClass}
           addFavoritePokemon={addFavoritePokemon}
           removeFavoritePokemon={removeFavoritePokemon}
-          isFavorited={favoritePokemons.includes(pokemon.name)}
-          pokemonName={pokemon.name}
+          isFavorited={isFavorited}
+          pokemon={pokemon}
         />
         <div className="pokemon-img">
           <img

@@ -15,13 +15,13 @@ function App() {
   const [favoritePokemons, setFavoritePokemons] = useState([]);
   const [isFilteringByFavorite, setIsFilteringByFavorite] = useState(false);
 
-  const addFavoritePokemon = (pokemonName) => {
-    setFavoritePokemons([...favoritePokemons, pokemonName]);
+  const addFavoritePokemon = (pokemon) => {
+    setFavoritePokemons([...favoritePokemons, pokemon]);
   };
 
-  const removeFavoritePokemon = (pokemonName) => {
+  const removeFavoritePokemon = (pokemon) => {
     setFavoritePokemons(
-      favoritePokemons.filter((name) => name !== pokemonName)
+      favoritePokemons.filter((poke) => poke.name !== pokemon.name)
     );
   };
 

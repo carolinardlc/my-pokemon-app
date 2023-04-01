@@ -3,13 +3,11 @@ function Star({
   addFavoritePokemon,
   removeFavoritePokemon,
   isFavorited,
-  pokemonName,
+  pokemon,
 }) {
   const handleClick = () => {
     addSpinClass();
-    isFavorited
-      ? removeFavoritePokemon(pokemonName)
-      : addFavoritePokemon(pokemonName);
+    isFavorited ? removeFavoritePokemon(pokemon) : addFavoritePokemon(pokemon);
   };
 
   return (

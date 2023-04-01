@@ -15,7 +15,7 @@ function PokemonList({
           addFavoritePokemon={addFavoritePokemon}
           removeFavoritePokemon={removeFavoritePokemon}
           favoritePokemons={favoritePokemons}
-          key={pokemon.id}
+          key={pokemon.name}
           pokemon={pokemon}
         />
       ))}
