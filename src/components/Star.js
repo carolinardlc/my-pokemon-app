@@ -14,6 +14,7 @@ function Star({
     <img
       onClick={handleClick}
       className="star"
+      alt="star"
       src={
         isFavorited
           ? "/icons/starsprite-favorite.png"
