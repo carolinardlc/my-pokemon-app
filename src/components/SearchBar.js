@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 
 const fetchPokemons = async () => {
-  let url = "https://pokeapi.co/api/v2/pokemon?limit=30";
+  let url = "https://pokeapi.co/api/v2/pokemon?limit=1000";
 
   const response = await fetch(url);
   const data = await response.json();
@@ -10,18 +10,21 @@ const fetchPokemons = async () => {
 };
 
 function SearchBar({ query, setQuery, setPokemons }) {
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = await fetchPokemons();
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const data = await fetchPokemons();
 
-    if (data) {
-      setPokemons(data.results);
-    }
-  };
+      if (data) {
+        setPokemons(data.results);
+      }
+    },
+    [setPokemons]
+  );
 
   useEffect(() => {
     handleSubmit({ preventDefault: () => {} });
-  }, []);
+  }, [handleSubmit]);
 
   return (
     <div className="search-bar">
