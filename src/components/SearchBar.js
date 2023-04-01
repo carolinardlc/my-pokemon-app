@@ -9,7 +9,13 @@ const fetchPokemons = async () => {
   return data;
 };
 
-function SearchBar({ query, setQuery, setPokemons }) {
+function SearchBar({
+  query,
+  setQuery,
+  setPokemons,
+  isFilteringByFavorite,
+  toggleIsFilteringByFavorite,
+}) {
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
@@ -35,7 +41,12 @@ function SearchBar({ query, setQuery, setPokemons }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button type="submit">Search</button>
+        <button style={{ borderRadius: 0 }} type="submit">
+          Search
+        </button>
+        <button type="button" onClick={toggleIsFilteringByFavorite}>
+          {isFilteringByFavorite && "No "}Filter
+        </button>
       </form>
     </div>
   );

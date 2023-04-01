@@ -4,12 +4,13 @@ import PokemonCard from "./PokemonCard";
 function PokemonList({
   addFavoritePokemon,
   removeFavoritePokemon,
+  isFilteringByFavorite,
   favoritePokemons,
   pokemons,
 }) {
   return (
     <div className="pokemon-list">
-      {pokemons.map((pokemon) => (
+      {(isFilteringByFavorite ? favoritePokemons : pokemons).map((pokemon) => (
         <PokemonCard
           addFavoritePokemon={addFavoritePokemon}
           removeFavoritePokemon={removeFavoritePokemon}
