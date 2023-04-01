@@ -41,11 +41,17 @@ function SearchBar({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button style={{ borderRadius: 0 }} type="submit">
+        <button
+          style={{
+            borderRadius: 2,
+            borderRight: "2px solid #F8C8DC",
+          }}
+          type="submit"
+        >
           Search
         </button>
         <button type="button" onClick={toggleIsFilteringByFavorite}>
-          {isFilteringByFavorite && "No "}Filter
+          {isFilteringByFavorite ? "See all" : "See favorites"}
         </button>
       </form>
     </div>
