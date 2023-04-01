@@ -1,10 +1,32 @@
 import React, { useState, useEffect } from "react";
+import Star from "./Star";
+import "../App.css";
 
-const PokemonCard = ({ pokemon }) => {
+const PokemonCard = ({
+  addFavoritePokemon,
+  removeFavoritePokemon,
+  favoritePokemons,
+  pokemon,
+}) => {
   const { url, name } = pokemon;
 
   const [pokemonData, setPokemonData] = useState(null);
-  console.log("pokemon data:\n", pokemonData);
+  const [effectClass, setEffectClass] = useState("");
+  const [spinClass, setSpinClass] = useState("");
+
+  const addSpinClass = () => {
+    setSpinClass("spin-effect");
+  };
+
+  useEffect(() => {
+    const handleRemoveClass = () => {
+      setEffectClass("");
+    };
+
+    setTimeout(handleRemoveClass, 10000);
+
+    return () => clearTimeout(handleRemoveClass);
+  }, [effectClass]);
 
   useEffect(() => {
     async function fetchData() {
@@ -18,7 +40,14 @@ const PokemonCard = ({ pokemon }) => {
 
   if (pokemonData) {
     return (
-      <div className="pokemon-card">
+      <div className={`pokemon-card ${effectClass} ${spinClass}`}>
+        <Star
+          addSpinClass={addSpinClass}
+          addFavoritePokemon={addFavoritePokemon}
+          removeFavoritePokemon={removeFavoritePokemon}
+          isFavorited={favoritePokemons.includes(pokemon.name)}
+          pokemonName={pokemon.name}
+        />
         <div className="pokemon-img">
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png`}

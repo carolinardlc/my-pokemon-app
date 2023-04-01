@@ -1,11 +1,22 @@
 import React from "react";
 import PokemonCard from "./PokemonCard";
 
-function PokemonList({ pokemons }) {
+function PokemonList({
+  addFavoritePokemon,
+  removeFavoritePokemon,
+  favoritePokemons,
+  pokemons,
+}) {
   return (
     <div className="pokemon-list">
       {pokemons.map((pokemon) => (
-        <PokemonCard key={pokemon.id} pokemon={pokemon} />
+        <PokemonCard
+          addFavoritePokemon={addFavoritePokemon}
+          removeFavoritePokemon={removeFavoritePokemon}
+          favoritePokemons={favoritePokemons}
+          key={pokemon.id}
+          pokemon={pokemon}
+        />
       ))}
     </div>
   );

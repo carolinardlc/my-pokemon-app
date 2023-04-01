@@ -12,11 +12,27 @@ const filterByQuery = (pokemons, query) => {
 function App() {
   const [pokemons, setPokemons] = useState([]);
   const [query, setQuery] = useState("");
+  const [favoritePokemons, setFavoritePokemons] = useState([]);
+
+  const addFavoritePokemon = (pokemonName) => {
+    setFavoritePokemons([...favoritePokemons, pokemonName]);
+  };
+
+  const removeFavoritePokemon = (pokemonName) => {
+    setFavoritePokemons(
+      favoritePokemons.filter((name) => name !== pokemonName)
+    );
+  };
 
   return (
     <div className="App">
       <SearchBar query={query} setQuery={setQuery} setPokemons={setPokemons} />
-      <PokemonList pokemons={filterByQuery(pokemons, query)} />
+      <PokemonList
+        addFavoritePokemon={addFavoritePokemon}
+        removeFavoritePokemon={removeFavoritePokemon}
+        favoritePokemons={favoritePokemons}
+        pokemons={filterByQuery(pokemons, query)}
+      />
     </div>
   );
 }
